@@ -30,6 +30,7 @@ const utils = require('./utils');
 const routetable = require('./routetable');
 const tasktable = require('./tasktable');
 const logger = require('./logger');
+const accessLog = require('./accessLog');
 const statusCodes = require('./statusCodes');
 const taskNew = require('./taskNew');
 const async = require('async');
@@ -204,11 +205,13 @@ module.exports = {
             try{
                 const urlParts = url.parse(req.url, true);
                 const { query, pathname } = urlParts;
-
+                
                 if (publicPath(pathname)){
                     forwardToReferenceNode(req, res);
                     return;
                 }
+
+                accessLog(req.socket.remoteAddress, req.url);
 
                 if (req.method === 'POST' && pathname === '/commit'){
                     const body = await getReqBody(req);

@@ -73,7 +73,8 @@ Options:
     --ssl-key <file>	Path to .pem SSL key file
     --ssl-cert <file>	Path to SSL .pem certificate
     --asr <file>	Path to configuration for enabling the autoscaler. This is combined with the provider's default configuration (default: none)
-
+    --access-log <file>	Path where to store access log file (default: none)
+    
 Log Levels: 
 error | debug | info | verbose | debug | silly 
 `);
@@ -104,6 +105,10 @@ config.logger.level = readConfig('log-level'); // What level to log at; info, ve
 config.logger.maxFileSize = 1024 * 1024 * 100; // Max file size in bytes of each log file; default 100MB
 config.logger.maxFiles = 10; // Max number of log files kept
 config.logger.logDirectory = '' // Set this to a full path to a directory - if not set logs will be written to the application directory.
+
+config.accessLog = {};
+config.accessLog.maxFileSize = 1024 * 1024 * 100;
+config.accessLog.logFile = readConfig("access-log");
 
 for (let k in argv){
     if (k === '_' || k.length === 1) continue;
