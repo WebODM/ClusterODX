@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: nodeodm
-          image: opendronemap/nodeodm:gpu
+          image: webodm/nodeodm:gpu
           ports:
             - containerPort: 3000
           volumeMounts:
@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
         - name: clusterodm
-          image: opendronemap/clusterodm
+          image: webodm/clusterodm
           ports:
             - containerPort: 3000
             - containerPort: 10000

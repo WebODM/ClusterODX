@@ -48,7 +48,7 @@ module.exports = class ScalewayAsrProvider extends AbstractASRProvider{
             "minImages": -1,
 
             "addSwap": 1,
-            "dockerImage": "opendronemap/nodeodm",
+            "dockerImage": "webodm/nodeodm",
             "dockerGpu": false,
             "dockerRegistry":{
                 "username": "",
