@@ -3,7 +3,7 @@ PLEASE REMOVE THIS NOTE AFTER READING IT!
 
 First of all, thank you for taking the time to report an issue.
 
-Before you continue, make sure you are in the right place. Please open an issue only to report faults and bugs. For installation problems, questions, server configuration problems and feature requests, please open a topic on http://community.opendronemap.org. 
+Before you continue, make sure you are in the right place. Please open an issue only to report faults and bugs.
 
 Every issue needs to follow the format specified below. Do not remove the questions, simply answer each question by typing below it. If you don't know how to answer a question, write so.
 ****************************************

@@ -52,7 +52,7 @@ module.exports = class AWSAsrProvider extends AbstractASRProvider{
             ],
 
             "addSwap": 1,
-            "dockerImage": "opendronemap/nodeodm",
+            "dockerImage": "webodm/nodeodm",
             "dockerDataDirMountPath": "",
             "dockerGpu": false,
 

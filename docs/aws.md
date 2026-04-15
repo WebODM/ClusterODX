@@ -62,7 +62,7 @@ the on-demand instance cost - you'll always pay the current market price, not yo
     ],
 
     "addSwap": 1,
-    "dockerImage": "opendronemap/nodeodm",
+    "dockerImage": "webodm/nodeodm",
     "dockerDataDirMountPath": "",
 
     "dockerRegistry":{

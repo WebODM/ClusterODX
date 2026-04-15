@@ -1,22 +1,22 @@
 # ClusterODM
 
-A reverse proxy, load balancer and task tracker with optional cloud autoscaling capabilities for NodeODM API compatible nodes. In a nutshell, it's a program to link together multiple [NodeODM](https://github.com/OpenDroneMap/NodeODM) API compatible nodes under a single network address. The program allows to distribute tasks across multiple nodes while taking in consideration factors such as maximum number of images, queue size and slots availability. It can also automatically spin up/down nodes based on demand using cloud computing providers (currently [DigitalOcean](https://m.do.co/c/2977a7634f44), [Hetzner](https://www.hetzner.com), [Scaleway](https://scaleway.com) or [Amazon Web Services](https://aws.amazon.com/)).
+A reverse proxy, load balancer and task tracker with optional cloud autoscaling capabilities for NodeODM API compatible nodes. In a nutshell, it's a program to link together multiple [NodeODM](https://github.com/WebODM/NodeODM) API compatible nodes under a single network address. The program allows to distribute tasks across multiple nodes while taking in consideration factors such as maximum number of images, queue size and slots availability. It can also automatically spin up/down nodes based on demand using cloud computing providers (currently [DigitalOcean](https://m.do.co/c/2977a7634f44), [Hetzner](https://www.hetzner.com), [Scaleway](https://scaleway.com) or [Amazon Web Services](https://aws.amazon.com/)).
 
 ![image](https://user-images.githubusercontent.com/1951843/57490594-b9828180-7287-11e9-9328-740cc0be8f7e.png)
 
-The program has been battle tested on [WebODM Lightning](https://webodm.net) for quite some time and has proven reliable in processing hundreds of thousands of datasets. However, if you find bugs, please [report them](https://github.com/OpenDroneMap/ClusterODM/issues).
+The program has been battle tested on [WebODM Lightning](https://webodm.net) for quite some time and has proven reliable in processing hundreds of thousands of datasets. However, if you find bugs, please [report them](https://github.com/WebODM/ClusterODM/issues).
 
 ## Installation
 
 The only requirement is a working installation of [NodeJS](https://nodejs.org) 14 or earlier (ClusterODM has compatibility issues with NodeJS 16 and later).
 
 ```bash
-git clone https://github.com/OpenDroneMap/ClusterODM
+git clone https://github.com/WebODM/ClusterODM
 cd ClusterODM
 npm install
 ```
 
-There's also a docker image available at `opendronemap/clusterodm` and a native [Windows bundle](#windows-bundle).
+There's also a docker image available at `webodm/clusterodm` and a native [Windows bundle](#windows-bundle).
 
 ## Usage
 
@@ -29,16 +29,16 @@ node index.js [parameters]
 Or with docker:
 
 ```bash
-docker run --rm -ti -p 3000:3000 -p 8080:8080 opendronemap/clusterodm [parameters]
+docker run --rm -ti -p 3000:3000 -p 8080:8080 webodm/clusterodm [parameters]
 ```
 
 Or with apptainer, after cd into ClusterODM directory:
 
 ```bash
-apptainer run docker://opendronemap/clusterodm [parameters]
+apptainer run docker://webodm/clusterodm [parameters]
 ```
 
-Then connect to the CLI and connect new [NodeODM](https://github.com/OpenDroneMap/NodeODM) instances:
+Then connect to the CLI and connect new [NodeODM](https://github.com/WebODM/NodeODM) instances:
 
 ```bash
 telnet localhost 8080
@@ -47,7 +47,7 @@ telnet localhost 8080
 > NODE LIST
 ```
 
-Finally, use a web browser to connect to `http://localhost:3000`. A normal [NodeODM](https://github.com/OpenDroneMap/NodeODM) UI should appear. This means the application is working, as web requests are being properly forwarded to nodes.
+Finally, use a web browser to connect to `http://localhost:3000`. A normal [NodeODM](https://github.com/WebODM/NodeODM) UI should appear. This means the application is working, as web requests are being properly forwarded to nodes.
 
 You can also check the status of nodes via a web interface available at `http://localhost:10000`.
 
@@ -96,7 +96,7 @@ docker-compose up
 
 ## Windows Bundle
 
-ClusterODM can run as a self-contained executable on Windows without the need for additional dependencies. You can download the latest `clusterodm-windows-x64.zip` bundle from the [releases](https://github.com/OpenDroneMap/ClusterODM/releases) page. Extract the contents in a folder and run:
+ClusterODM can run as a self-contained executable on Windows without the need for additional dependencies. You can download the latest `clusterodm-windows-x64.zip` bundle from the [releases](https://github.com/WebODM/ClusterODM/releases) page. Extract the contents in a folder and run:
 
 ```bash
 clusterodm.exe
@@ -180,6 +180,6 @@ Port 3000 is ClusterODM's proxy. This is the place we assign tasks to ClusterODM
 After adding images in this browser, you can press Start Task and see ClusterODM assigning tasks to the nodes you have wired to. Go for a walk and check the progress.
 
 
-## Roadmap
+## Contributing
 
-We have [plenty of goals](https://github.com/OpenDroneMap/ClusterODM/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement). If you want to help, or need help getting started contributing, get in touch on the [OpenDroneMap community forum](https://community.opendronemap.org).
+We welcome contributions! Feel free to open pull requests.

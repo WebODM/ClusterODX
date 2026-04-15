@@ -47,7 +47,7 @@ Example configuration file:
     "minImages": -1,
 
     "addSwap": 1,
-    "dockerImage": "opendronemap/nodeodm",
+    "dockerImage": "webodm/nodeodm",
 
     "dockerRegistry":{
         "username": "",
