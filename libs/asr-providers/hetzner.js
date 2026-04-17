@@ -1,6 +1,6 @@
 /**
- *  ClusterODM - A reverse proxy, load balancer and task tracker for NodeODM
- *  Copyright (C) 2018-present MasseranoLabs LLC
+ *  ClusterODX - A reverse proxy, load balancer and task tracker for NodeODX
+ *  Copyright (C) 2018-present WebODM Contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as
@@ -55,7 +55,7 @@ module.exports = class HetznerAsrProvider extends AbstractASRProvider{
             "minImages": -1,
 
             "addSwap": 1,
-            "dockerImage": "webodm/nodeodm",
+            "dockerImage": "webodm/nodeodx",
             "dockerGpu": false,
             "dockerRegistry":{
                 "username": "",
@@ -147,7 +147,7 @@ module.exports = class HetznerAsrProvider extends AbstractASRProvider{
         let imageName = this.getConfig("image");
 
         // We need to fetch the imageID
-        const response = await axios.get("https://api.hetzner.cloud/v1/images?type=snapshot&description=nodeodm-image&page=1&per_page=9999999", { 
+        const response = await axios.get("https://api.hetzner.cloud/v1/images?type=snapshot&description=nodeodx-image&page=1&per_page=9999999", { 
             timeout: 10000,
             headers: {
                 Authorization: `Bearer ${this.getConfig("apiToken")}`

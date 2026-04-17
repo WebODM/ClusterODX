@@ -32,7 +32,7 @@ jobs:
       id: docker_meta
       uses: docker/metadata-action@v5
       with:
-        images: webodm/clusterodm
+        images: webodm/clusterodx
         tags: |
           type=semver,pattern={{version}}
           type=ref,event=branch,pattern=latest

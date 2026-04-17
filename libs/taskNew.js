@@ -1,6 +1,6 @@
 /**
- *  ClusterODM - A reverse proxy, load balancer and task tracker for NodeODM
- *  Copyright (C) 2018-present MasseranoLabs LLC
+ *  ClusterODX - A reverse proxy, load balancer and task tracker for NodeODX
+ *  Copyright (C) 2018-present WebODM Contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as
@@ -219,7 +219,7 @@ module.exports = {
 
         if (config.splitmerge){
             // We automatically set the "sm-cluster" parameter
-            // to match the address that was used to reach ClusterODM.
+            // to match the address that was used to reach ClusterODX.
             // if "--split" is set.
             const clusterUrl = netutils.publicAddressPath('/', req, token);
 

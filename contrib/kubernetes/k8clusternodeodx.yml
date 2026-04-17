@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeodm-deployment
+  name: nodeodx-deployment
 spec:
   replicas: REPNUM 
   selector:
     matchLabels:
-      app: nodeodm
+      app: nodeodx
   template:
     metadata:
       labels:
-        app: nodeodm
+        app: nodeodx
     spec:
       containers:
-        - name: nodeodm
-          image: webodm/nodeodm:gpu
+        - name: nodeodx
+          image: webodm/nodeodx:gpu
           ports:
             - containerPort: 3000
           volumeMounts:
@@ -29,20 +29,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: clusterodm-deployment
+  name: clusterodx-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: clusterodm
+      app: clusterodx
   template:
     metadata:
       labels:
-        app: clusterodm
+        app: clusterodx
     spec:
       containers:
-        - name: clusterodm
-          image: webodm/clusterodm
+        - name: clusterodx
+          image: webodm/clusterodx
           ports:
             - containerPort: 3000
             - containerPort: 10000
@@ -53,11 +53,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodeodm-service
+  name: nodeodx-service
 spec:
   type: NodePort
   selector:
-    app: nodeodm
+    app: nodeodx
   ports:
     - protocol: TCP
       port: 3000
@@ -69,7 +69,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: clusterodm-service
+  name: clusterodx-service
 spec:
   type: LoadBalancer
   externalIPs:
@@ -85,4 +85,4 @@ spec:
       port: 8080
       targetPort: 8080
   selector:
-    app: clusterodm
+    app: clusterodx

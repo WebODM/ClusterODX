@@ -1,6 +1,6 @@
 /**
- *  ClusterODM - A reverse proxy, load balancer and task tracker for NodeODM
- *  Copyright (C) 2018-present MasseranoLabs LLC
+ *  ClusterODX - A reverse proxy, load balancer and task tracker for NodeODX
+ *  Copyright (C) 2018-present WebODM Contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as
@@ -196,7 +196,7 @@ module.exports = class AbstractASRProvider{
     generateHostname(imagesCount){
         if (imagesCount === undefined) throw new Error("Images count missing");
         
-        return `clusterodm-${imagesCount}-${short.generate()}`;
+        return `clusterodx-${imagesCount}-${short.generate()}`;
     }
 
     getConfig(key, defaultValue = ""){

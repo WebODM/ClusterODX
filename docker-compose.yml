@@ -1,14 +1,14 @@
 version: '2.1'
 services:
-  nodeodm-1:
-    image: webodm/nodeodm
-    container_name: nodeodm-1
+  nodeodx-1:
+    image: webodm/nodeodx
+    container_name: nodeodx-1
     ports:
       - "3000"
     restart: on-failure:10
-  clusterodm:
-    image: webodm/clusterodm
-    container_name: clusterodm
+  clusterodx:
+    image: webodm/clusterodx
+    container_name: clusterodx
     ports:
       - "4000:3000"
       - "8080:8080"
@@ -17,4 +17,4 @@ services:
       - ./docker/data:/var/www/data
     restart: on-failure:10
     depends_on:
-      - nodeodm-1
+      - nodeodx-1

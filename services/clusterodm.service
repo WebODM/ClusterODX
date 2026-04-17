@@ -1,11 +1,11 @@
 [Unit]
-Description=Start ClusterODM Service
+Description=Start ClusterODX Service
 
 [Service]
 Type=simple
-PIDFile=/run/clusterodm.pid
-User=odm
-Group=odm
+PIDFile=/run/clusterodx.pid
+User=odx
+Group=odx
 WorkingDirectory=/www
 ExecStart=/usr/bin/node index.js
 ExecStop=/bin/kill -s QUIT $MAINPID

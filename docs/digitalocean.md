@@ -21,7 +21,7 @@ Example configuration file:
     "region": ["sfo2", "sfo1"],
     
     "image": "ubuntu-16-04-x64",
-    "tags": ["clusterodm"],
+    "tags": ["clusterodx"],
 
     "snapshot": false,
     "engineInstallUrl": "\"https://releases.rancher.com/install-docker/19.03.9.sh\"",
@@ -38,7 +38,7 @@ Example configuration file:
     "minImages": -1,
 
     "addSwap": 1,
-    "dockerImage": "webodm/nodeodm",
+    "dockerImage": "webodm/nodeodx",
 
     "dockerRegistry":{
         "username": "",

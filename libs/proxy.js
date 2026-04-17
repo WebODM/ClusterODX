@@ -1,6 +1,6 @@
 /**
- *  ClusterODM - A reverse proxy, load balancer and task tracker for NodeODM
- *  Copyright (C) 2018-present MasseranoLabs LLC
+ *  ClusterODX - A reverse proxy, load balancer and task tracker for NodeODX
+ *  Copyright (C) 2018-present WebODM Contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as
@@ -174,7 +174,7 @@ module.exports = {
         proxy.on('error', function (err, req, res) {
             // If the error is caused by a connection issue,
             // we actually simulate the same behavior by dropping the connection
-            // because returning an error could make a NodeODM client assume that something failed
+            // because returning an error could make a NodeODX client assume that something failed
             if (res.socket && (err.code === 'ECONNRESET' || err.code === 'ECONNREFUSED')){
                 logger.warn(`Proxy redirect error: ${err.message}`);
                 res.socket.destroy();

@@ -4,7 +4,7 @@ const path = require('path');
 const async = require('async');
 const archiver = require('archiver');
 
-const bundleName = "clusterodm-windows-x64.zip";
+const bundleName = "clusterodx-windows-x64.zip";
 
 async.series([
     cb => {
@@ -28,7 +28,7 @@ async.series([
 
     cb => {
         console.log("Building executable");
-        const code = spawnSync('nexe.cmd', ['index.js', '-t', 'windows-x64-12.16.3', '-o', 'clusterodm.exe', '-r', 'libs/**'], { stdio: "pipe"}).status;
+        const code = spawnSync('nexe.cmd', ['index.js', '-t', 'windows-x64-12.16.3', '-o', 'clusterodx.exe', '-r', 'libs/**'], { stdio: "pipe"}).status;
 
         if (code === 0) cb();
         else cb(new Error(`nexe returned non-zero error code: ${code}`));
@@ -63,7 +63,7 @@ async.series([
             "config-default.json",
             "LICENSE",
             "package.json",
-            "clusterodm.exe"
+            "clusterodx.exe"
         ];
 
         archive.pipe(output);

@@ -6,7 +6,7 @@
 #SBATCH --time=20:00:00
 
 cd $HOME
-cd ODM/NodeODM/
+cd ODX/NodeODX/
 
 #Launched on Node 48
 srun --nodes=1 apptainer run --writable node/ &

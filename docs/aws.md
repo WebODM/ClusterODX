@@ -1,19 +1,19 @@
 # Provider Configuration for Amazon Web Services
 
-In order to use ClusterODM with AWS:
+In order to use ClusterODX with AWS:
 
 * Create an Amazon Web Services Account
 * Select a region to run your instances in - `us-east-2` typically has the cheapest instance costs.
 * Note the zone selected for the region, e.g. 'a'.  This will appear appended to the region in 'availability zone'.
 * Select/Create a VPC in which the resources will operate.
 * Select/Create a subnet within the VPC.
-* Create a security group in this region, VPC, and subnet which allows inbound access from your ClusterODM master instance on TCP port 3000. Note the name of the security group not the ID.
+* Create a security group in this region, VPC, and subnet which allows inbound access from your ClusterODX master instance on TCP port 3000. Note the name of the security group not the ID.
 * Create an S3 bucket in this region to handle results. If you don't specify an ACL, we will default to 'public-read', which requires public read access enabled for your bucket.
 * Select an AMI (machine image) to run - Ubuntu has a [handy AMI finder](https://cloud-images.ubuntu.com/locator/ec2/).
-* Create an IAM account for ClusterODM to use, which has EC2 and S3 permissions.
-* Create a ClusterODM configuration json file as below.
+* Create an IAM account for ClusterODX to use, which has EC2 and S3 permissions.
+* Create a ClusterODX configuration json file as below.
 
-To optimise transfer speeds in large jobs, it's worth running ClusterODM in the same AWS region as your worker nodes.
+To optimise transfer speeds in large jobs, it's worth running ClusterODX in the same AWS region as your worker nodes.
 
 ## Using Spot Instances
 
@@ -44,7 +44,7 @@ the on-demand instance cost - you'll always pay the current market price, not yo
     "maxUploadTime": -1,
     "region": "us-west-2",
     "zone": "a",
-    "tags": ["type,clusterodm"],
+    "tags": ["type,clusterodx"],
     
     "ami": "ami-07b4f3c02c7f83d59",
     "engineInstallUrl": "\"https://releases.rancher.com/install-docker/19.03.9.sh\"",
@@ -62,7 +62,7 @@ the on-demand instance cost - you'll always pay the current market price, not yo
     ],
 
     "addSwap": 1,
-    "dockerImage": "webodm/nodeodm",
+    "dockerImage": "webodm/nodeodx",
     "dockerDataDirMountPath": "",
 
     "dockerRegistry":{
@@ -80,9 +80,9 @@ the on-demand instance cost - you'll always pay the current market price, not yo
 | s3                       | S3 bucket configuration.                                                                                                                                   |
 | vpc                      | The virtual private cloud in which the instances operate. Not providing this assumes a default setting for VPC within the AWS environment.                 |
 | subnet                   | The subnet supporting the instances.  Not providing this assumes a default setting for the subnet within the AWS environment.                              |
-| usePrivateAddress        | Set to true to use the private IP address when communicating with auto-scaled nodes. Useful if ClusterODM is on the same vpc as the auto-scaled nodes.     |
+| usePrivateAddress        | Set to true to use the private IP address when communicating with auto-scaled nodes. Useful if ClusterODX is on the same vpc as the auto-scaled nodes.     |
 | assignPrivateAddressOnly | Set to true to ensure that only a private IP address is assigned to the created node. Only has effect if usePrivateAddress is true. Avoids extra charges.  |
-| securityGroup            | AWS Security Group name (not ID). Must exist and allow incoming connections from your ClusterODM host on port TCP/3000.                                    |
+| securityGroup            | AWS Security Group name (not ID). Must exist and allow incoming connections from your ClusterODX host on port TCP/3000.                                    |
 | createRetries            | Number of attempts to create a droplet before giving up. Defaults to 1.                                                                                    |
 | maxRuntime               | Maximum number of seconds an instance is allowed to run ever. Set to -1 for no limit.                                                                      |
 | maxUploadTime            | Maximum number of seconds an instance is allowed to receive file uploads. Set to -1 for no limit.                                                          |
@@ -96,14 +96,14 @@ the on-demand instance cost - you'll always pay the current market price, not yo
 | imageSizeMapping         | Max images count to instance size mapping. (See below.)                                                                                                    |
 | addSwap                  | Optionally add this much swap space to the instance as a factor of total RAM (`RAM * addSwap`). A value of `1` sets a swapfile equal to the available RAM. |
 | dockerImage              | Docker image to launch                                                                                                                                     |
-| dockerDataDirMountPath   | Path on node host to map to NodeODM data directory (/var/www/data). Use local instance storage for much faster I/O.                                        |
+| dockerDataDirMountPath   | Path on node host to map to NodeODX data directory (/var/www/data). Use local instance storage for much faster I/O.                                        |
 | dockerGpu                | Enables GPU acceleration by passing `--gpu all` to docker                                                                                                  |
-| nodeSetupCmd             | Can be optionally used to run a setup command on auto-scaled nodes right before we run ODM.                                                                |
+| nodeSetupCmd             | Can be optionally used to run a setup command on auto-scaled nodes right before we run ODX.                                                                |
 | dockerRegistry           | If pulling images from a private registry or repository, issue a docker login with these information                                                       |
 
 ## Image Size Mapping
 
-The `imageSizeMapping` dictionary dictates the instance parameters which will be requested by ClusterODM based on the number of images in the incoming task. The least powerful
+The `imageSizeMapping` dictionary dictates the instance parameters which will be requested by ClusterODX based on the number of images in the incoming task. The least powerful
 instance able to process the requested number of images is always selected.
 
 [EC2Instances.info](https://www.ec2instances.info) is a useful resource to help in selecting the appropriate instance type.
@@ -115,6 +115,6 @@ instance able to process the requested number of images is always selected.
 | storage   | Amount of storage to allocate to this instance's EBS root volume, in GB.                          |
 | spotPrice | The maximum hourly price you're willing to bid for this instance (if spot instances are enabled). |
 
-If `dockerDataDirMountPath` is specified and a local mount path is used for NodeODM's data directory (such as local NVMe storage on AWS 'd' instances), 
+If `dockerDataDirMountPath` is specified and a local mount path is used for NodeODX's data directory (such as local NVMe storage on AWS 'd' instances), 
 the `storage` parameter here does not need to scale with image sizes and can be statically set lower. This is because the local NVMe storage will be used for temporary data 
 storage and not the instance's root EBS volume. However, it is important to ensure that the local storage size will be sufficient for the desired image count.

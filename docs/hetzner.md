@@ -51,7 +51,7 @@ Example configuration file:
     "minImages": -1,
 
     "addSwap": 1,
-    "dockerImage": "webodm/nodeodm",
+    "dockerImage": "webodm/nodeodx",
 
     "dockerRegistry":{
         "username": "",

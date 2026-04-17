@@ -1,6 +1,6 @@
 /**
- *  ClusterODM - A reverse proxy, load balancer and task tracker for NodeODM
- *  Copyright (C) 2018-present MasseranoLabs LLC
+ *  ClusterODX - A reverse proxy, load balancer and task tracker for NodeODX
+ *  Copyright (C) 2018-present WebODM Contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as
@@ -43,7 +43,7 @@ module.exports = class AWSAsrProvider extends AbstractASRProvider{
             "region": "us-west-2",
             "zone": "",
             "monitoring": false,
-            "tags": ["clusterodm"],
+            "tags": ["clusterodx"],
             "ami": "ami-07b4f3c02c7f83d59",
             "spot": false,
             "imageSizeMapping": [
@@ -52,7 +52,7 @@ module.exports = class AWSAsrProvider extends AbstractASRProvider{
             ],
 
             "addSwap": 1,
-            "dockerImage": "webodm/nodeodm",
+            "dockerImage": "webodm/nodeodx",
             "dockerDataDirMountPath": "",
             "dockerGpu": false,
 
