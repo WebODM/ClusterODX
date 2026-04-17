@@ -19,7 +19,12 @@ RUN mkdir -p $NVM_DIR /var/www && \
     nvm install $NODE_VERSION && \
     nvm alias default $NODE_VERSION && \
     ln -sf $(find $NVM_DIR -path "*/bin/node" | head -1) /usr/bin/node && \
-    ln -sf $(find $NVM_DIR -path "*/bin/npm" | head -1) /usr/bin/npm && \
+    ln -sf $(find $NVM_DIR -path "*/bin/npm" | head -1) /usr/bin/npm
+
+# Install build tools needed to compile native modules (node-libcurl)
+RUN apt-get update && \
+    apt-get install -y python3 make g++ libcurl4-openssl-dev && \
+    ln -sf /usr/bin/python3 /usr/bin/python && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR "/var/www"
