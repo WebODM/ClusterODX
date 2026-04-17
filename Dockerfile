@@ -1,28 +1,31 @@
-FROM node:14
+ARG FROM_REPO=webodm/odx
+FROM ${FROM_REPO}
 MAINTAINER Piero Toffanin <pt@masseranolabs.com>
 
 EXPOSE 3000
 
 USER root
 
-RUN apt update && apt install -y telnet curl && \
-    base=https://gitlab-docker-machine-downloads.s3.amazonaws.com/main && \
-    curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine && \
-    install /tmp/docker-machine /usr/local/bin/docker-machine && \
-    curl -L https://github.com/scaleway/docker-machine-driver-scaleway/releases/download/v1.6/docker-machine-driver-scaleway_1.6_linux_amd64.tar.gz | tar -xz --directory=/tmp && \
-    install --mode +x /tmp/docker-machine-driver-scaleway /usr/local/bin/ && \
-    curl -L https://github.com/JonasProgrammer/docker-machine-driver-hetzner/releases/download/2.0.1/docker-machine-driver-hetzner_2.0.1_linux_amd64.tar.gz | tar -xz --directory=/tmp && \
-    install --mode +x /tmp/docker-machine-driver-hetzner /usr/local/bin/
+ENV NVM_DIR=/usr/local/nvm
+ENV NODE_VERSION=14
 
-RUN mkdir /var/www
+RUN mkdir -p $NVM_DIR /var/www && \
+    for i in $(seq 1 20); do \
+        apt-get update && apt-get install -y curl gpg-agent && break; \
+        echo "apt-get failed, retrying... ($i/20)"; \
+        sleep 30; \
+    done && \
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && \
+    . $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION && \
+    nvm alias default $NODE_VERSION && \
+    ln -sf $(find $NVM_DIR -path "*/bin/node" | head -1) /usr/bin/node && \
+    ln -sf $(find $NVM_DIR -path "*/bin/npm" | head -1) /usr/bin/npm && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 WORKDIR "/var/www"
-COPY --chown=node:node . /var/www
+COPY . /var/www
 
-RUN npm install
+RUN npm install --production
 
-RUN chown -R node:node /var/www
-
-USER node
-
-VOLUME ["/var/www/data"]
-ENTRYPOINT ["/usr/local/bin/node", "/var/www/index.js"]
+ENTRYPOINT ["/usr/bin/node", "/var/www/index.js"]
