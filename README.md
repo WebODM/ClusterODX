@@ -1,5 +1,7 @@
 # ClusterODX
 
+![Docker Build](https://img.shields.io/github/actions/workflow/status/WebODM/ClusterODX/publish-docker.yml?branch=master&label=docker%20CPU) ![Windows Build](https://img.shields.io/github/actions/workflow/status/WebODM/ClusterODX/publish-windows.yml?branch=master&label=windows) ![Version](https://img.shields.io/github/v/release/WebODM/ClusterODX) ![License](https://img.shields.io/github/license/WebODM/ClusterODX) ![Contributors](https://img.shields.io/github/contributors/WebODM/ClusterODX) ![Updated](https://img.shields.io/github/last-commit/WebODM/ClusterODX)
+
 A reverse proxy, load balancer and task tracker with optional cloud autoscaling capabilities for NodeODX API compatible nodes. In a nutshell, it's a program to link together multiple [NodeODX](https://github.com/WebODM/NodeODX) API compatible nodes under a single network address. The program allows to distribute tasks across multiple nodes while taking in consideration factors such as maximum number of images, queue size and slots availability. It can also automatically spin up/down nodes based on demand using cloud computing providers (currently [DigitalOcean](https://m.do.co/c/2977a7634f44), [Hetzner](https://www.hetzner.com), [Scaleway](https://scaleway.com) or [Amazon Web Services](https://aws.amazon.com/)).
 
 ![image](https://user-images.githubusercontent.com/1951843/57490594-b9828180-7287-11e9-9328-740cc0be8f7e.png)
