@@ -1,5 +1,4 @@
-ARG FROM_REPO=webodm/odx
-FROM ${FROM_REPO}
+FROM ubuntu:24.04
 MAINTAINER Piero Toffanin <pt@masseranolabs.com>
 
 EXPOSE 3000
