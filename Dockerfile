@@ -18,8 +18,7 @@ RUN mkdir -p $NVM_DIR /var/www && \
     . $NVM_DIR/nvm.sh && \
     nvm install $NODE_VERSION && \
     nvm alias default $NODE_VERSION && \
-    ln -sf $(find $NVM_DIR -path "*/bin/node" | head -1) /usr/bin/node && \
-    ln -sf $(find $NVM_DIR -path "*/bin/npm" | head -1) /usr/bin/npm
+    ln -sf $(find $NVM_DIR -path "*/bin/node" | head -1) /usr/bin/node
 
 # Install build tools needed to compile native modules (node-libcurl)
 RUN apt-get update && \
@@ -30,6 +29,6 @@ RUN apt-get update && \
 WORKDIR "/var/www"
 COPY . /var/www
 
-RUN npm install --production
+RUN $(find $NVM_DIR -path "*/bin/npm" | head -1) install --production
 
 ENTRYPOINT ["/usr/bin/node", "/var/www/index.js"]
