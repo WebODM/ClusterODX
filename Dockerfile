@@ -29,6 +29,8 @@ RUN apt-get update && \
 WORKDIR "/var/www"
 COPY . /var/www
 
-RUN $(find $NVM_DIR -path "*/bin/npm" | head -1) install --production
+RUN . $NVM_DIR/nvm.sh && \
+    nvm use default && \
+    npm install --production
 
 ENTRYPOINT ["/usr/bin/node", "/var/www/index.js"]
