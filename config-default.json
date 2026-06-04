@@ -7,7 +7,7 @@
     "cloud-provider": "local",
     "downloads-from-s3": "",
     "splitmerge": true,
-    "cluster-address": "",
+    "public-address": "",
     "token":"",
     "debug": false,
     "log-level": "info",
