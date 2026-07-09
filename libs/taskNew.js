@@ -455,7 +455,7 @@ module.exports = {
                         const body = fileNames.map(f => { return { name: 'images', file: path.join(tmpPath, f) } });
                         
                         const curl = curlInstance(done, async (err) => {
-                                if (status.aborted) return; // Ignore if this was aborted by other code
+                                if (status.aborted) return reject(new Error("status.aborted")); // Ignore if this was aborted by other code
 
                                 if (retries < MAX_RETRIES){
                                     retries++;
@@ -531,6 +531,7 @@ module.exports = {
                     if (!autoscale) node.decTransients();
                 }catch(e){
                     if (!autoscale) node.decTransients();
+                    if (e.message === "status.aborted") return;
 
                     // Attempt to retry
                     if (retries < MAX_UPLOAD_RETRIES){
