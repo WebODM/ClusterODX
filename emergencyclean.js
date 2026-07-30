@@ -68,7 +68,8 @@ function main() {
         return;
     }
 
-    // Filter by staleness
+    // Compute size/staleness for every folder
+    var allFolders = [];
     var staleFolders = [];
     var nowMs = Date.now();
 
@@ -81,36 +82,47 @@ function main() {
         }
 
         var mostRecentMtimeMs = -Infinity;
+        var totalSize = 0;
         for (var j = 0; j < files.length; j++) {
             if (files[j].mtimeMs > mostRecentMtimeMs) {
                 mostRecentMtimeMs = files[j].mtimeMs;
             }
+            totalSize += files[j].size;
         }
 
         var diffMs = nowMs - mostRecentMtimeMs;
+        var info = {
+            name: uuidFolders[i],
+            path: folderPath,
+            totalSize: totalSize,
+            diffMinutes: Math.round(diffMs / 60000)
+        };
+
+        allFolders.push(info);
 
         if (diffMs > STALENESS_THRESHOLD_MS) {
-            var totalSize = 0;
-            for (var k = 0; k < files.length; k++) {
-                totalSize += files[k].size;
-            }
-            staleFolders.push({
-                name: uuidFolders[i],
-                path: folderPath,
-                totalSize: totalSize,
-                diffMinutes: Math.round(diffMs / 60000)
-            });
+            staleFolders.push(info);
         }
     }
 
-    if (staleFolders.length === 0) {
-        console.log('No stale UUID folders.');
-        return;
-    }
+    var toDelete;
 
-    // Sort by size descending, keep top 3
-    staleFolders.sort(function (a, b) { return b.totalSize - a.totalSize; });
-    var toDelete = staleFolders.slice(0, 3);
+    if (staleFolders.length > 0) {
+        // Sort by size descending, keep top 3
+        staleFolders.sort(function (a, b) { return b.totalSize - a.totalSize; });
+        toDelete = staleFolders.slice(0, 3);
+    } else {
+        // No stale folders, but disk space still needs to be reclaimed:
+        // fall back to deleting the single largest folder, stale or not.
+        if (allFolders.length === 0) {
+            console.log('No UUID folders with files in tmp.');
+            return;
+        }
+
+        allFolders.sort(function (a, b) { return b.totalSize - a.totalSize; });
+        toDelete = allFolders.slice(0, 1);
+        console.log('No stale UUID folders, falling back to largest folder.');
+    }
 
     console.log('Folders selected for deletion (' + toDelete.length + ')');
     for (var i = 0; i < toDelete.length; i++) {
