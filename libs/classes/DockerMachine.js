@@ -61,7 +61,9 @@ module.exports = {
                 childProcess
                     .on('exit', (code, _) => {
                         cleanup();
-                        if (code === 0) resolve(output.join("\n"));
+                        const outText = output.join("\n");
+                        logger.debug(outText);
+                        if (code === 0) resolve(outText);
                         else reject(new Error(`docker-machine exited with code ${code}`));
                     })
                     .on('error', () => {

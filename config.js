@@ -120,4 +120,6 @@ for (let k in argv){
 }
 
 config.use_ssl = config.ssl_key && config.ssl_cert;
+if (config.debug) config.logger.level = 'debug';
+
 module.exports = config;
